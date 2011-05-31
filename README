@@ -1,0 +1,65 @@
+COMP 5900
+
+Mykola Konyk,
+mykola@konyk.org
+
+Wed, March 11, 2009
+Distributed under MS-RL license.
+-------------------
+
+
+Hello!
+
+Here's my implementation of Assignment 3.
+
+
+Implementation
+----------------
+Project is built using
+1) OpenGL (GLUT) 
+2) Nvidia Cg shader library http://developer.nvidia.com/object/cg_toolkit.html#downloads 
+
+I've tested it on Nvidia Cg 2.0 and 2.1. Project contains an xcode project, as well as a makefile,
+which should work on mac, linux and cygwin, providing that OpenGL, GLUT and CG libraries are installed.
+
+I am not sure about compiling the code on Windows, but you might need to change paths to Cg/GL/Glut in
+Globals.h file (which is included in the project).
+
+
+
+About the demo
+--------------
+It's possible to switch between rendering modes by using number keys (1..7), keys (q, w) and right mouse 
+button - this brings up the menu. Moving mouse while holding left mouse button will rotate the object (scene).
+
+
+
+Rendering modes
+---------------
+1) Cel shading with world space outline detection (from depth buffer)
+2) Cel shading with object space outline detection (from normals)
+3) Cel shading without any outline
+4) Outline detection (from depth buffer)
+5) Phong shading
+6) Normal buffer
+7) Depth buffer
+q) Render torus model
+w) Render teapot model
+
+
+Code
+----
+All GUI (GLUT) code is contained in GlutApplication.h/cpp
+RenderTexture.h/cpp contains basic implementation of render texture, using FBOs
+CgShader.h/cpp - base class for all shaders in this application
+CgShaderNormal.h/cpp - shader used for rendering normal buffer
+CgShaderPhong.h/cpp - shader used for rendering phong lightning model
+CgShaderCel.h/cpp - shader used for rendering cel shading, with or without object-space outline
+CgShaderOutline.h/cpp - shader used for rendering outline (from depth - buffer)
+CgShaderCelScreen.h/cpp - shader used for rendering cel with screen-space outline (merges CgShaderCel and
+							CgShaderOutline results)
+
+
+All shader code is loaded from c++ code (using strings instead of loading from external cg files).
+
+
